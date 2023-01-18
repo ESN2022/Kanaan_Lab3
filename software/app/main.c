@@ -35,7 +35,7 @@ int main()
 		z_axis = (alt_16)((I2C_READ_ADXL345(DATAZ1) << 8) | I2C_READ_ADXL345(DATAZ0));
 		alt_printf("%d\n", z_axis);
 
-		usleep(200000);
+		usleep(1000000);
 	}
 }
 
