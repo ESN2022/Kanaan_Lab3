@@ -98,10 +98,10 @@ ACDS_VERSION := 18.1
 
 # This following BUILD_NUMBER comment indicates the build number of the tool 
 # used to generate this makefile. 
-# BUILD_NUMBER: 646
+# BUILD_NUMBER: 625
 
 SETTINGS_FILE := settings.bsp
-SOPC_FILE := ../../Lab3_sys.sopcinfo
+SOPC_FILE := ../../lab3_qsys.sopcinfo
 
 #-------------------------------------------------------------------------------
 #                             TOOL & COMMAND DEFINITIONS
@@ -219,10 +219,6 @@ altera_avalon_jtag_uart_driver_C_LIB_SRCS := \
 	$(altera_avalon_jtag_uart_driver_SRCS_ROOT)/src/altera_avalon_jtag_uart_ioctl.c \
 	$(altera_avalon_jtag_uart_driver_SRCS_ROOT)/src/altera_avalon_jtag_uart_fd.c
 
-# altera_avalon_pio_driver sources root 
-altera_avalon_pio_driver_SRCS_ROOT := drivers
-
-# altera_avalon_pio_driver sources 
 # altera_nios2_gen2_hal_driver sources root 
 altera_nios2_gen2_hal_driver_SRCS_ROOT := HAL
 

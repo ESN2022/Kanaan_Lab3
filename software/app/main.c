@@ -1,7 +1,7 @@
+#include <stdio.h>
 #include "system.h"
 #include "alt_types.h"
 #include "opencores_i2c.h"
-#include <sys/alt_stdio.h>
 
 #define ADXL345_I2C_ADDRESS 0x1D
 #define I2C_CLK_SPEED 100000u
@@ -25,60 +25,47 @@ void I2C_WRITE_ADXL345(alt_u8 reg, alt_u8 data);
 
 int main()
 {
+	
+	printf("Hello world\r\n");
 	I2C_init(ADXL345_I2C_ADDRESS, ALT_CPU_CPU_FREQ, I2C_CLK_SPEED);
-	while (1)
-	{
-		x_axis = (alt_16)((I2C_READ_ADXL345(DATAX1) << 8) | I2C_READ_ADXL345(DATAX0));
-		alt_printf("%d\t", x_axis);
-		y_axis = (alt_16)((I2C_READ_ADXL345(DATAY1) << 8) | I2C_READ_ADXL345(DATAY0));
-		alt_printf("%d\t", y_axis);
-		z_axis = (alt_16)((I2C_READ_ADXL345(DATAZ1) << 8) | I2C_READ_ADXL345(DATAZ0));
-		alt_printf("%d\n", z_axis);
+	// while (1)
+	// {
+		// x_axis = (alt_16)((I2C_READ_ADXL345(DATAX1) << 8) | I2C_READ_ADXL345(DATAX0));
+		// printf("%d\t", x_axis);
+		// y_axis = (alt_16)((I2C_READ_ADXL345(DATAY1) << 8) | I2C_READ_ADXL345(DATAY0));
+		// printf("%d\t", y_axis);
+		// z_axis = (alt_16)((I2C_READ_ADXL345(DATAZ1) << 8) | I2C_READ_ADXL345(DATAZ0));
+		// printf("%d\n", z_axis);
 
-		usleep(1000000);
-	}
+		// usleep(1000000);
+	// }
 }
 
 alt_u32 I2C_READ_ADXL345(alt_u8 reg)
 {
 	alt_u32 read_byte;
 
-	while (ack)
+	ack = I2C_start(ADXL345_I2C_ADDRESS, ADXL345_I2C_ADDRESS, 0);
+	if (ack == 0)
 	{
-		ack = I2C_start(ADXL345_I2C_ADDRESS, ADXL345_I2C_ADDRESS, 0);
-		if (ack == 0)
-		{
-			ack = 1;
-			break;
-		}
+		I2C_write(OPENCORES_I2C_0_BASE, reg, 0);
 	}
-	I2C_write(OPENCORES_I2C_0_BASE, reg, 0);
-
-	while (ack)
+	
+	ack = I2C_start(ADXL345_I2C_ADDRESS, ADXL345_I2C_ADDRESS, 1);
+	if (ack == 0)
 	{
-		ack = I2C_start(ADXL345_I2C_ADDRESS, ADXL345_I2C_ADDRESS, 1);
-		if (ack == 0)
-		{
-			ack = 1;
-			break;
-		}
+		read_byte = I2C_read(OPENCORES_I2C_0_BASE, 1);
 	}
-	read_byte = I2C_read(OPENCORES_I2C_0_BASE, 1);
 
 	return read_byte;
 }
 
 void I2C_WRITE_ADXL345(alt_u8 reg, alt_u8 data)
 {
-	while (ack)
+	ack = I2C_start(ADXL345_I2C_ADDRESS, ADXL345_I2C_ADDRESS, 0);
+	if (ack == 0)
 	{
-		ack = I2C_start(ADXL345_I2C_ADDRESS, ADXL345_I2C_ADDRESS, 0);
-		if (ack == 0)
-		{
-			ack = 1;
-			break;
-		}
+		I2C_write(OPENCORES_I2C_0_BASE, reg, 0);
+		I2C_write(OPENCORES_I2C_0_BASE, data, 1);
 	}
-	I2C_write(OPENCORES_I2C_0_BASE, reg, 0);
-	I2C_write(OPENCORES_I2C_0_BASE, data, 1);
 }
