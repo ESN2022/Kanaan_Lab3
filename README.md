@@ -4,6 +4,7 @@
 In this lab we use the DE10-Lite's ADXL345 embedded accelerometer to display acceleration on the x, y, and z axis. The accelerometer communication was done through an I2C bus.
 
 #B. System architecture
+
 Here is a basic design of our Qsys design
 ![image](https://user-images.githubusercontent.com/114091388/213652878-2ad081a4-0730-4b2f-9866-5edc1aec10b1.png)
 
@@ -14,6 +15,7 @@ In addtion, We created our own I2C read and I2C write function in the main.c acc
 Furthermore, we made sure to have our x, and z axis read variable as signed bits of width 16 because acceleration can be negative and the date of each axis is read on two register of 8 bits each. 
 
 #C. Results
+
 Due the lack of time, I was only able to program the basic design in C. The photo below shows data gathered from each axis and printed on the nios2 terminal. However, a calibration is still required to calibrate the offset values of each axis. 
 
 ![image](https://user-images.githubusercontent.com/114091388/213659178-69649d45-6536-4a36-b921-ff1a5532d30d.png)
