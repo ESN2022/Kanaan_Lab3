@@ -28,11 +28,11 @@ int main()
 	I2C_init(OPENCORES_I2C_0_BASE, ALT_CPU_CPU_FREQ, I2C_CLK_SPEED);
 	while (1)
 	{
-		x_axis = ((alt_16) ~((I2C_READ_ADXL345(DATAX1) - 1) << 8) | ~(I2C_READ_ADXL345(DATAX0) - 1));
+		x_axis = (alt_16) (I2C_READ_ADXL345(DATAX1) << 8) | I2C_READ_ADXL345(DATAX0);
 		printf("x=%d\t", x_axis);
-		y_axis = ((alt_16) ~((I2C_READ_ADXL345(DATAY1) - 1) << 8) | ~(I2C_READ_ADXL345(DATAY0) - 1));
+		y_axis = (alt_16) (I2C_READ_ADXL345(DATAY1) << 8) | I2C_READ_ADXL345(DATAY0);
 		printf("y=%d\t", y_axis);
-		z_axis = ((alt_16) ~((I2C_READ_ADXL345(DATAZ1) - 1) << 8) | ~(I2C_READ_ADXL345(DATAZ0) - 1));
+		z_axis = (alt_16) (I2C_READ_ADXL345(DATAZ1) << 8) | I2C_READ_ADXL345(DATAZ0);
 		printf("z=%d\r\n", z_axis);
 
 		usleep(1000000);
