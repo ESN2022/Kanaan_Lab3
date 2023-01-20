@@ -14,7 +14,7 @@ We also created our own I2C read and I2C write function in the main.c according 
 #C. Results
 Due the lack of time, I was only able to program the basic design in C. The photo below shows data gathered from each axis and printed on the nios2 terminal. However, a calibration is still required to calibrate the offset values of each axis. 
 
-![image](https://user-images.githubusercontent.com/114091388/213657386-d533d2f3-0e63-4663-b005-2ed561e2201c.png)
+![image](https://user-images.githubusercontent.com/114091388/213659178-69649d45-6536-4a36-b921-ff1a5532d30d.png)
 
 #D. Conclusion
 This lab taught us how to read data from the accelerometer and use the I2C protocol to do so. We also learned how to display the gather data in the nios2 terminal.
